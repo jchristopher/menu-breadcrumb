@@ -16,9 +16,10 @@ Breadcrumbs are often generated from Page structure, but in a world of Custom Po
 
 == Installation ==
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
+1. Download `menu-breadcrumb.zip` and extract
+1. Upload the `menu-breadcrumb` folder to the `/wp-content/plugins/` directory
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Place `<?php if ( function_exists( 'menu_breadcrumb') ) { menu_breadcrumb( 'my-menu-id' ); } ?>` in your templates where you want the breadcrumb to appear
 
 == Frequently Asked Questions ==
 
