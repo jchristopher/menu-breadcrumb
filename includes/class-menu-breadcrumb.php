@@ -79,7 +79,6 @@ class Menu_Breadcrumb {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_public_hooks();
 
 	}
 
@@ -91,7 +90,6 @@ class Menu_Breadcrumb {
 	 * - Menu_Breadcrumb_Loader. Orchestrates the hooks of the plugin.
 	 * - Menu_Breadcrumb_i18n. Defines internationalization functionality.
 	 * - Menu_Breadcrumb_Admin. Defines all hooks for the dashboard.
-	 * - Menu_Breadcrumb_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -113,12 +111,6 @@ class Menu_Breadcrumb {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-menu-breadcrumb-i18n.php';
 
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-menu-breadcrumb-public.php';
-
 		$this->loader = new Menu_Breadcrumb_Loader();
 
 	}
@@ -138,22 +130,6 @@ class Menu_Breadcrumb {
 		$plugin_i18n->set_domain( $this->get_plugin_name() );
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Menu_Breadcrumb_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
