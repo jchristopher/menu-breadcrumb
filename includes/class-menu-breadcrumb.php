@@ -260,31 +260,6 @@ class Menu_Breadcrumb {
 	}
 
 	/**
-	 * Recursively retrieve an array of parent Menu item objects
-	 *
-	 * @since       1.0.0
-	 * @param       WP_Post $child_menu_item    The child for which we want parent Menu items
-	 * @param       array $parents              The existing ancestors
-	 * @return      bool|array                  The final ancestors
-	 */
-	function get_parents( $child_menu_item, $parents = array() ) {
-		$parent_menu_item = false;
-		foreach ( $this->menu_items as $menu_item ) {
-			if ( absint( $child_menu_item->menu_item_parent ) == absint( $menu_item->ID ) ) {
-				$parent_menu_item = $menu_item;
-				break;
-			}
-		}
-
-		if ( $parent_menu_item ) {
-			$parents[] = $parent_menu_item;
-			return $this->get_parents( $parent_menu_item, $parents );
-		}
-
-		return false;
-	}
-
-	/**
 	 * Generate HTML for each breadcrumb
 	 *
 	 * @since       1.0.0
