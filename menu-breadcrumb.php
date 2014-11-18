@@ -38,10 +38,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-menu-breadcrumb.php';
  * @since    1.0.0
  */
 function run_menu_breadcrumb() {
-
 	$plugin = new Menu_Breadcrumb();
 	$plugin->run();
-
 }
 run_menu_breadcrumb();
 
