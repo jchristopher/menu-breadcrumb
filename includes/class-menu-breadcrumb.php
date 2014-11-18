@@ -64,16 +64,16 @@ class Menu_Breadcrumb {
 	 * @access   protected
 	 * @var      string    $menu_location    The Location of the Menu
 	 */
-	protected $menu_location;
+	public $menu_location = '';
 
 	/**
 	 * The Menu object
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      object    $menu    The Menu
+	 * @var      bool|object    $menu    The Menu
 	 */
-	protected $menu;
+	public $menu = false;
 
 	/**
 	 * The Menu items
@@ -82,7 +82,7 @@ class Menu_Breadcrumb {
 	 * @access   protected
 	 * @var      array     $menu_items    The current version of the plugin.
 	 */
-	protected $menu_items;
+	public $menu_items = array();
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -96,11 +96,18 @@ class Menu_Breadcrumb {
 	 */
 	public function __construct( $menu_location = '' ) {
 
-		$this->plugin_name      = 'menu-breadcrumb';
-		$this->version          = '1.0.0';
-		$this->menu_location    = $menu_location;
-		$this->menu             = wp_get_nav_menu_object( $this->menu_location );
-		$this->menu_items       = wp_get_nav_menu_items( $this->menu->term_id );
+		$this->plugin_name = 'menu-breadcrumb';
+		$this->version = '1.0.0';
+		$this->menu_location = $menu_location;
+
+		// for convenience everything is built on Menu location (e.g. user changes out an entire Menu)
+		$menu_locations = get_nav_menu_locations();
+
+		// make sure the location exists
+		if ( isset( $menu_locations[ $this->menu_location ] ) ) {
+			$this->menu = wp_get_nav_menu_object( $menu_locations[ $this->menu_location ] );
+			$this->menu_items = wp_get_nav_menu_items( $this->menu->term_id );
+		}
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -264,6 +271,10 @@ class Menu_Breadcrumb {
 
 		$current_menu_item = false;
 
+		if ( empty( $this->menu_items ) ) {
+			return $current_menu_item;
+		}
+
 		// loop through the entire nav menu and determine whether any have a class="current" or are the current URL (e.g. a Custom Link was used)
 		foreach ( $this->menu_items as $menu_item ) {
 
@@ -293,7 +304,13 @@ class Menu_Breadcrumb {
 	 * @return      bool|WP_post                    The parent Menu object
 	 */
 	public function get_parent_menu_item_object( $current_menu_item ) {
+
 		$parent_menu_item = false;
+
+		if ( empty( $this->menu_items ) ) {
+			return $current_menu_item;
+		}
+
 		foreach ( $this->menu_items as $menu_item ) {
 			if ( absint( $current_menu_item->menu_item_parent ) == absint( $menu_item->ID ) ) {
 				$parent_menu_item = $menu_item;
@@ -313,6 +330,10 @@ class Menu_Breadcrumb {
 	 * @return      string              The generated markup for the entire breadcrumb trail
 	 */
 	public function generate_markup( $breadcrumbs, $separator ) {
+
+		if ( empty( $breadcrumbs ) ) {
+			return '';
+		}
 
 		// allow for filtration of post object per breadcrumb
 		foreach ( $breadcrumbs as $key => $breadcrumb ) {
