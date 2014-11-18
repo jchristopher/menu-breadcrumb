@@ -12,7 +12,7 @@ Generate a breadcrumb trail from a WordPress Menu
 
 == Description ==
 
-Breadcrumbs are often generated from Page structure, but in a world of Custom Post Types that doesn't always work. Menu Breadcrumb uses your WordPress Menu to generate a breadcrumb trail.
+Breadcrumbs are often generated from Page structure, but in a world of Custom Post Types that doesn't always work. Menu Breadcrumb uses your WordPress Menu to generate a breadcrumb trail based on the current page.
 
 == Installation ==
 
@@ -23,7 +23,22 @@ Breadcrumbs are often generated from Page structure, but in a world of Custom Po
 
 == Frequently Asked Questions ==
 
-= Documentation? =
+= How do I output a breadcrumb trail? =
+
+Add the following to your theme template where you would like to output the breadcrumb:
+
+`<?php
+    if ( function_exists( 'menu_breadcrumb') ) {
+        menu_breadcrumb(
+            'main',                             // Menu Location to use for breadcrumb
+            ' &raquo; ',                        // separator between each breadcrumb
+            '<p class="menu-breadcrumb">',      // output before the breadcrumb
+            '</p>'                              // output after the breadcrumb
+        );
+    }
+?>`
+
+= More documentation? =
 
 Of course! [https://github.com/jchristopher/menu-breadcrumb](https://github.com/jchristopher/menu-breadcrumb)
 
