@@ -57,8 +57,31 @@ class Menu_Breadcrumb {
 	 */
 	protected $version;
 
+	/**
+	 * The Location of the Menu
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $menu_location    The Location of the Menu
+	 */
+	protected $menu_location;
 
-	protected $menu_id;
+	/**
+	 * The Menu object
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      object    $menu    The Menu
+	 */
+	protected $menu;
+
+	/**
+	 * The Menu items
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array     $menu_items    The current version of the plugin.
+	 */
 	protected $menu_items;
 
 	/**
@@ -70,12 +93,13 @@ class Menu_Breadcrumb {
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct( $menu_id = '' ) {
+	public function __construct( $menu_location = '' ) {
 
-		$this->plugin_name = 'menu-breadcrumb';
-		$this->version = '1.0.0';
-		$this->menu_id = $menu_id;
-		$this->menu_items = wp_get_nav_menu_items( $this->menu_id );
+		$this->plugin_name      = 'menu-breadcrumb';
+		$this->version          = '1.0.0';
+		$this->menu_location    = $menu_location;
+		$this->menu             = wp_get_nav_menu_object( $this->menu_location );
+		$this->menu_items       = wp_get_nav_menu_items( $this->menu->term_id );
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -290,7 +314,7 @@ class Menu_Breadcrumb {
 	 * @return      array|string    Breadcrumb of WP_Post objects
 	 */
 	public function generate() {
-		$current_menu_item = $this->get_current_menu_item_object( $this->menu_id );
+		$current_menu_item = $this->get_current_menu_item_object();
 
 		if ( empty( $current_menu_item ) ) {
 			return '';
