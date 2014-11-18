@@ -45,7 +45,7 @@ If you would like to utilize Menu Breadcrumb more granularly you can use the cla
 
 #### Mimic `menu_breadcrumb()`
 
-``php
+```php
 <?php
     $menu_breadcrumb = new Menu_Breadcrumb( 'main' );   // 'main' is the Menu Location
 	$menu_breadcrumb->render( ' &raquo; ', '<p class="menu-breadcrumb">', '</p>' );
