@@ -51,8 +51,8 @@ run_menu_breadcrumb();
  * @since    1.0.0
  */
 if ( ! function_exists( 'menu_breadcrumb' ) ) {
-	function menu_breadcrumb( $menu ='', $separator = ' &raquo; ', $before = '', $after ='' ) {
-		$menu_breadcrumb = new Menu_Breadcrumb( $menu );
+	function menu_breadcrumb( $menu_location = '', $separator = ' &raquo; ', $before = '', $after ='' ) {
+		$menu_breadcrumb = new Menu_Breadcrumb( $menu_location );
 		$menu_breadcrumb->render( $separator, $before, $after );
 	}
 }

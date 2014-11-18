@@ -92,6 +92,7 @@ class Menu_Breadcrumb {
 	 * the public-facing side of the site.
 	 *
 	 * @since    1.0.0
+	 * @param    string $menu_location    The Location of the Menu to use
 	 */
 	public function __construct( $menu_location = '' ) {
 
@@ -291,7 +292,7 @@ class Menu_Breadcrumb {
 	 * @param       string $separator   String to inject between each link
 	 * @return      string              The generated markup for the entire breadcrumb trail
 	 */
-	public function markup( $breadcrumbs, $separator ) {
+	public function generate_markup( $breadcrumbs, $separator ) {
 
 		// allow for filtration of post object per breadcrumb
 		foreach ( $breadcrumbs as $key => $breadcrumb ) {
@@ -313,7 +314,7 @@ class Menu_Breadcrumb {
 	 * @since       1.0.0
 	 * @return      array|string    Breadcrumb of WP_Post objects
 	 */
-	public function generate() {
+	public function generate_trail() {
 		$current_menu_item = $this->get_current_menu_item_object();
 
 		if ( empty( $current_menu_item ) ) {
@@ -343,10 +344,10 @@ class Menu_Breadcrumb {
 	 * @param       string $after       HTML to inject after the entire breadcrumb
 	 */
 	public function render( $separator = ' &raquo; ', $before = '', $after = '' ) {
-		$breadcrumb = $this->generate( $separator, $before, $after );
+		$breadcrumb = $this->generate_trail();
 
 		// right now it's an array of objects, we need to grab our permalinks
-		$breadcrumb = $this->markup( $breadcrumb, $separator );
+		$breadcrumb = $this->generate_markup( $breadcrumb, $separator );
 
 		echo $before . $breadcrumb . $after;
 	}
