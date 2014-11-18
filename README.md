@@ -130,6 +130,9 @@ If you would like to disable that, you can remove all filters before adding your
 
 <dl>
 
+    <dt>1.0.2</dt>
+    <dd>Added a <code>menu_breadcrumb_level</code> property to each breadcrumb object</dd>
+
     <dt>1.0.1</dt>
     <dd>Fixed an issue where the Menu wasn't properly retrieved from the location</dd>
 

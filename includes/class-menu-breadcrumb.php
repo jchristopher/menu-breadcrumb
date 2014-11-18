@@ -97,7 +97,7 @@ class Menu_Breadcrumb {
 	public function __construct( $menu_location = '' ) {
 
 		$this->plugin_name = 'menu-breadcrumb';
-		$this->version = '1.0.0';
+		$this->version = '1.0.2';
 		$this->menu_location = $menu_location;
 
 		// for convenience everything is built on Menu location (e.g. user changes out an entire Menu)
@@ -375,6 +375,16 @@ class Menu_Breadcrumb {
 
 		// since we worked backwards, we need to reverse everything
 		$breadcrumb = array_reverse( $breadcrumb );
+
+		// add a level for each breadcrumb object
+		$i = 1;
+		foreach ( $breadcrumb as $key => $val ) {
+			if ( ! isset( $val->menu_breadcrumb_level ) ) {
+				$val->menu_breadcrumb_level = $i;
+				$breadcrumb[ $key ] = $val;
+			}
+			$i++;
+		}
 
 		return $breadcrumb;
 	}

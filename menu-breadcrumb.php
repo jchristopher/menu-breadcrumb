@@ -8,7 +8,7 @@
  * Plugin Name:       Menu Breadcrumb
  * Plugin URI:        https://github.com/jchristopher/menu-breadcrumb
  * Description:       Generate a breadcrumb trail from a WordPress Menu
- * Version:           1.0.1
+ * Version:           1.0.2
  * Author:            Jonathan Christopher
  * Author URI:        https://mondaybynoon.com/
  * License:           GPL-2.0+
