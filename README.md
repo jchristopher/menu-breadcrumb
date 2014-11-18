@@ -130,7 +130,10 @@ If you would like to disable that, you can remove all filters before adding your
 
 <dl>
 
-	<dt>1.0</dt>
+    <dt>1.0.1</dt>
+    <dd>Fixed an issue where the Menu wasn't properly retrieved from the location</dd>
+
+	<dt>1.0.0</dt>
     <dd>Initial release</dd>
 
 </dl>

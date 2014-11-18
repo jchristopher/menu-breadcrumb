@@ -4,7 +4,7 @@ Donate link: https://mondaybynoon.com/donate/
 Tags: menu, breadcrumb, breadcrumbs, nav, navigation, menus
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,6 +13,8 @@ Generate a breadcrumb trail from a WordPress Menu
 == Description ==
 
 Breadcrumbs are often generated from Page structure, but in a world of Custom Post Types that doesn't always work. Menu Breadcrumb uses your WordPress Menu to generate a breadcrumb trail based on the current page.
+
+[View on GitHub!](https://github.com/jchristopher/menu-breadcrumb)
 
 == Installation ==
 
@@ -47,6 +49,9 @@ Of course! [https://github.com/jchristopher/menu-breadcrumb](https://github.com/
 Of course! [https://github.com/jchristopher/menu-breadcrumb](https://github.com/jchristopher/menu-breadcrumb)
 
 == Changelog ==
+
+= 1.0.1 =
+* Fixed an issue where the Menu wasn't properly retrieved from the location
 
 = 1.0.0 =
 * Initial release
