@@ -53,7 +53,7 @@ If you would like to utilize Menu Breadcrumb more granularly you can use the cla
 
 #### Generate a breadcrumb array
 
-``php
+```php
 <?php
     $menu_breadcrumb = new Menu_Breadcrumb( 'main' );   // 'main' is the Menu Location
 	$breadcrumb_array = $menu_breadcrumb->generate_trail();
@@ -62,7 +62,7 @@ If you would like to utilize Menu Breadcrumb more granularly you can use the cla
 
 #### Generate breadcrumb markup from breadcrumb array
 
-``php
+```php
 <?php
     $menu_breadcrumb = new Menu_Breadcrumb( 'main' );   // 'main' is the Menu Location
 	$breadcrumb_array = $menu_breadcrumb->generate_trail();
@@ -72,7 +72,7 @@ If you would like to utilize Menu Breadcrumb more granularly you can use the cla
 
 #### Get current Menu item (of the page currently being viewed)
 
-``php
+```php
 <?php
     $menu_breadcrumb = new Menu_Breadcrumb( 'main' );   // 'main' is the Menu Location
 	$current_menu_item_object = $menu_breadcrumb->get_current_menu_item_object();
