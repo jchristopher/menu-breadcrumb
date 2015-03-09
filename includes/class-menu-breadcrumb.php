@@ -403,8 +403,9 @@ class Menu_Breadcrumb {
 		// right now it's an array of objects, we need to grab our permalinks
 		$breadcrumb = $this->generate_markup( $breadcrumb, $separator );
 
-		if ($breadcrumb)
+		if ($breadcrumb) {
 			echo $before . $breadcrumb . $after;
+		}
 	}
 
 	/**
