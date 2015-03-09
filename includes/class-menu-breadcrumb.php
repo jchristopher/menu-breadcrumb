@@ -250,7 +250,7 @@ class Menu_Breadcrumb {
 	public function is_at_url( $url = '' ) {
 		global $post;
 
-		if ( empty( $url ) ) {
+		if ( empty( $url ) || empty( $post ) ) {
 			return false;
 		}
 
