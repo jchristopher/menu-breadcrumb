@@ -376,7 +376,7 @@ class Menu_Breadcrumb {
 		// since we worked backwards, we need to reverse everything
 		$breadcrumb = array_reverse( $breadcrumb );
 		
-		$breadcrumb = array_filters( 'menu_breadcrumb_trail', $breadcrumb, $this->menu_items );
+		$breadcrumb = apply_filters( 'menu_breadcrumb_trail', $breadcrumb, $this->menu_items );
 
 		// add a level for each breadcrumb object
 		$i = 1;
