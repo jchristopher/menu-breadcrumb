@@ -80,10 +80,20 @@ class Menu_Breadcrumb {
 	 *
 	 * @since    1.0.0
 	 * @access   private
+	 * @deprecated Use $sorted_menu_items instead 
 	 * @var      array     $menu_items    The current version of the plugin.
 	 */
 	private $menu_items = array();
 
+	/**
+	 * The Menu items
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array     $sorted_menu_items    The menu items in array.
+	 */
+	public $sorted_menu_items = array();
+	
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -107,12 +117,31 @@ class Menu_Breadcrumb {
 		if ( isset( $menu_locations[ $this->menu_location ] ) ) {
 			$this->menu = wp_get_nav_menu_object( $menu_locations[ $this->menu_location ] );
 			$this->menu_items = wp_get_nav_menu_items( $this->menu->term_id );
+			
+			add_filter( 'wp_nav_menu_objects', array( $this, 'set_sorted_menu_items' ) );
+			wp_nav_menu( array(
+				'theme_location' => $this->menu_location,
+				'echo' => false,
+				'walker' => new Walker_Nav_Menu(), /* make sure the default walker is used! */
+			) );
+			remove_filter( 'wp_nav_menu_objects', array( $this, 'set_sorted_menu_items' ) );
 		}
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_public_hooks();
 
+	}
+	
+	/**
+	 * This function will be called by the wp_nav_menu_objects filter,
+	 * after wordpress has added the current page information
+	 * and after execution of the default walker.
+	 * 
+	 * @param array $items
+	 */
+	public function set_sorted_menu_items($items) {
+		$this->sorted_menu_items = $items;
 	}
 
 	/**
@@ -265,32 +294,40 @@ class Menu_Breadcrumb {
 	 * Retrieve the current Menu item object for the current Menu.
 	 *
 	 * @since       1.0.0
-	 * @return      bool|WP_Post    The current Menu item
+	 * @return      bool|WP_Post    The current Menu item (false if not found)
 	 */
 	public function get_current_menu_item_object() {
 
 		$current_menu_item = false;
 
-		if ( empty( $this->menu_items ) ) {
+		if ( empty( $this->sorted_menu_items ) ) {
 			return $current_menu_item;
 		}
 
+		$parent = array();
+
 		// loop through the entire nav menu and determine whether any have a class="current" or are the current URL (e.g. a Custom Link was used)
-		foreach ( $this->menu_items as $menu_item ) {
-
+		foreach ( $this->sorted_menu_items as $menu_item) {
 			// if WordPress was able to detect the current page
-			if ( is_array( $menu_item->classes ) && in_array( 'current', $menu_item->classes ) ) {
+			if ( $menu_item->current ) {
 				$current_menu_item = $menu_item;
-			}
-
-			// if the current URL matches a Custom Link
-			if ( ! $current_menu_item && isset( $menu_item->url ) && $this->is_at_url( $menu_item->url ) ) {
-				$current_menu_item = $menu_item;
-			}
-
-			if ( $current_menu_item ) {
 				break;
 			}
+
+			// Maybe we don't find the page in the menu, but a parent
+			if ( is_array($menu_item->classes) && in_array('current_page_parent', $menu_item->classes) ) {
+				$parent = $menu_item;
+			}
+			
+			// if the current URL matches a Custom Link
+			if ( isset( $menu_item->url ) && $this->is_at_url( $menu_item->url ) ) {
+				$current_menu_item = $menu_item;
+				break;
+			}
+		}
+		
+		if (!$current_menu_item && $parent) {
+			return $parent;
 		}
 
 		return $current_menu_item;
@@ -301,17 +338,17 @@ class Menu_Breadcrumb {
 	 *
 	 * @since       1.0.0
 	 * @param       WP_Post $current_menu_item      The current Menu item object
-	 * @return      bool|WP_post                    The parent Menu object
+	 * @return      bool|WP_Post                    The parent Menu object
 	 */
 	public function get_parent_menu_item_object( $current_menu_item ) {
 
 		$parent_menu_item = false;
 
-		if ( empty( $this->menu_items ) ) {
+		if ( empty( $this->sorted_menu_items ) ) {
 			return $current_menu_item;
 		}
 
-		foreach ( $this->menu_items as $menu_item ) {
+		foreach ( $this->sorted_menu_items as $menu_item ) {
 			if ( absint( $current_menu_item->menu_item_parent ) == absint( $menu_item->ID ) ) {
 				$parent_menu_item = $menu_item;
 				break;
