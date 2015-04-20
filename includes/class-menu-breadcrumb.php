@@ -61,28 +61,28 @@ class Menu_Breadcrumb {
 	 * The Location of the Menu
 	 *
 	 * @since    1.0.0
-	 * @access   protected
+	 * @access   private
 	 * @var      string    $menu_location    The Location of the Menu
 	 */
-	public $menu_location = '';
+	private $menu_location = '';
 
 	/**
 	 * The Menu object
 	 *
 	 * @since    1.0.0
-	 * @access   protected
+	 * @access   private
 	 * @var      bool|object    $menu    The Menu
 	 */
-	public $menu = false;
+	private $menu = false;
 
 	/**
 	 * The Menu items
 	 *
 	 * @since    1.0.0
-	 * @access   protected
+	 * @access   private
 	 * @var      array     $menu_items    The current version of the plugin.
 	 */
-	public $menu_items = array();
+	private $menu_items = array();
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -404,6 +404,36 @@ class Menu_Breadcrumb {
 		$breadcrumb = $this->generate_markup( $breadcrumb, $separator );
 
 		echo $before . $breadcrumb . $after;
+	}
+
+	/**
+	 * Getter for Menu location
+	 *
+	 * @since       1.0.3
+	 * @return      string     Menu location
+	 */
+	public function get_menu_location() {
+		return $this->menu_location;
+	}
+
+	/**
+	 * Getter for Menu items
+	 *
+	 * @since       1.0.3
+	 * @return      object          Menu object
+	 */
+	public function get_menu() {
+		return $this->menu;
+	}
+
+	/**
+	 * Getter for Menu items
+	 *
+	 * @since       1.0.3
+	 * @return      array|mixed     Menu item objects
+	 */
+	public function get_menu_items() {
+		return $this->menu_items;
 	}
 
 }
