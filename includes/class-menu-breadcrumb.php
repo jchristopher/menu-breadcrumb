@@ -470,7 +470,7 @@ class Menu_Breadcrumb {
 	 * @return      array|mixed     Menu item objects
 	 */
 	public function get_menu_items() {
-		if (!isset($this->menu_items))
+		if ($this->menu_items === array())
 			$this->menu_items = wp_get_nav_menu_items( $this->menu->term_id );
 		return $this->menu_items;
 	}
