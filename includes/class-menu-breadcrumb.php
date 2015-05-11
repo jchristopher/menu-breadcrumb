@@ -486,3 +486,4 @@ class Menu_Breadcrumb {
 	}
 
 }
+
