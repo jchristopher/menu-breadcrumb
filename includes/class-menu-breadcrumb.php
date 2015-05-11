@@ -92,7 +92,7 @@ class Menu_Breadcrumb {
 	 * @access   protected
 	 * @var      array     $sorted_menu_items    The menu items in array.
 	 */
-	public $sorted_menu_items = array();
+	protected $sorted_menu_items = array();
 	
 	/**
 	 * Define the core functionality of the plugin.
@@ -467,10 +467,21 @@ class Menu_Breadcrumb {
 	 * Getter for Menu items
 	 *
 	 * @since       1.0.3
+	 * @deprecated Use get_sorted_menu_items() instead 
 	 * @return      array|mixed     Menu item objects
 	 */
 	public function get_menu_items() {
 		return $this->menu_items;
+	}
+	
+	/**
+	 * Getter for Menu items
+	 *
+	 * @since       1.0.3
+	 * @return      array|mixed     Menu item objects
+	 */	
+	public function get_sorted_menu_items() {
+		return $this->sorted_menu_items;
 	}
 
 }
