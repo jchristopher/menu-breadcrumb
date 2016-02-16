@@ -1,0 +1,26 @@
+{
+    "name": "jchristopher/menu-breadcrumb",
+    "description": "Generate a breadcrumb trail from a WordPress Menu",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Jonathan Christopher",
+            "email": "jonathan@mondaybynoon.com",
+            "homepage": "https://github.com/jchristopher/",
+            "role": "Developer"
+        }
+    ],
+    "keywords": ["wordpress", "plugin", "breadcrumb", "menu"],
+    "homepage": "https://github.com/jchristopher/menu-breadcrumb",
+    "type": "wordpress-plugin",
+    "support": {
+        "issues": "https://github.com/jchristopher/menu-breadcrumb/issues",
+        "source": "https://wordpress.org/plugins/menu-breadcrumb/"
+    },
+    "require": {
+        "php": ">5.2.4"
+    },
+    "suggest": {
+        "composer/installers": "~1.0"
+    }
+}
