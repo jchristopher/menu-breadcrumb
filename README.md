@@ -129,6 +129,10 @@ If you would like to disable that, you can remove all filters before adding your
 #### Changelog
 
 <dl>
+    <dt>1.0.3</dt>
+    <dd>Add filter to allow custom breadcrumbs. Props [benjaminpick](https://github.com/jchristopher/menu-breadcrumb/pull/2)</dd>
+    <dd>If empty breadcrumbs he shouldn't show $before and $after. Props [benjaminpick](https://github.com/jchristopher/menu-breadcrumb/pull/3)</dd>
+    <dd>Tested up to WordPress 6.9</dd>
 
     <dt>1.0.2</dt>
     <dd>Added a <code>menu_breadcrumb_level</code> property to each breadcrumb object</dd>
