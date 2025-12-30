@@ -250,7 +250,7 @@ class Menu_Breadcrumb {
 	public function is_at_url( $url = '' ) {
 		global $post;
 
-		if ( empty( $url ) ) {
+		if ( empty( $url ) || empty( $post ) ) {
 			return false;
 		}
 
@@ -394,8 +394,8 @@ class Menu_Breadcrumb {
 	 *
 	 * @since       1.0.0
 	 * @param       string $separator   Inserted between each breadcrumb item
-	 * @param       string $before      HTML to inject before the entire breadcrumb
-	 * @param       string $after       HTML to inject after the entire breadcrumb
+	 * @param       string $before      HTML to inject before the entire breadcrumb (if not empty)
+	 * @param       string $after       HTML to inject after the entire breadcrumb (if not empty)
 	 */
 	public function render( $separator = ' &raquo; ', $before = '', $after = '' ) {
 		$breadcrumb = $this->generate_trail();
@@ -403,7 +403,9 @@ class Menu_Breadcrumb {
 		// right now it's an array of objects, we need to grab our permalinks
 		$breadcrumb = $this->generate_markup( $breadcrumb, $separator );
 
-		echo $before . $breadcrumb . $after;
+		if ($breadcrumb) {
+			echo $before . $breadcrumb . $after;
+		}
 	}
 
 	/**
@@ -437,3 +439,4 @@ class Menu_Breadcrumb {
 	}
 
 }
+
