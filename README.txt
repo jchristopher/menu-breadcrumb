@@ -1,10 +1,9 @@
 === Menu Breadcrumb ===
 Contributors: jchristopher
-Donate link: https://mondaybynoon.com/donate/
 Tags: menu, breadcrumb, breadcrumbs, nav, navigation, menus
 Requires at least: 4.0
-Tested up to: 4.0
-Stable tag: 1.0.2
+Tested up to: 6.9
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +52,7 @@ Of course! [https://github.com/jchristopher/menu-breadcrumb](https://github.com/
 = 1.0.3 =
 * Add filter to allow custom breadcrumbs. Props [benjaminpick](https://github.com/jchristopher/menu-breadcrumb/pull/2)
 * If empty breadcrumbs he shouldn't show $before and $after. Props [benjaminpick](https://github.com/jchristopher/menu-breadcrumb/pull/3)
+* Tested up to WordPress 6.9
 
 = 1.0.2 =
 * Added a `menu_breadcrumb_level` property to each breadcrumb object
