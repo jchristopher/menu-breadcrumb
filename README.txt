@@ -50,6 +50,9 @@ Of course! [https://github.com/jchristopher/menu-breadcrumb](https://github.com/
 
 == Changelog ==
 
+= 1.0.3 =
+* Add filter to allow custom breadcrumbs. Props [benjaminpick](https://github.com/jchristopher/menu-breadcrumb/pull/2)
+
 = 1.0.2 =
 * Added a `menu_breadcrumb_level` property to each breadcrumb object
 
